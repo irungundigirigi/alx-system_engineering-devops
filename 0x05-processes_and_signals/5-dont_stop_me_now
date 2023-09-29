@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Kills the 4-to_infinity_and_beyond process
+# Requirement: You must use kill
+
+pids=$(pgrep -f "4-to_infinity_and_beyond")
+
+# Check if any matching processes were found
+if [ -n "$pids" ]; then
+    echo "Stopping (PIDs: $pids)"
+    for pid in $pids; do
+        kill "$pid"
+    done
+else
+    echo "Process not running"
+fi
+
