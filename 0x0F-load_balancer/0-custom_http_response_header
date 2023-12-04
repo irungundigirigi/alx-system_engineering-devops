@@ -18,7 +18,7 @@ echo 'Hello World!' | sudo tee /var/www/html/index.html
 echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
 
 # Configure a redirect for a specific page (/redirect_me) and add a header to display the server's hostname.
-redirect_config="server_name _;\n\tadd_header X-Served-By \$hostname;\n\trewrite ^\/redirect_me https:\/\/www.blog.ehoneahobed.com permanent;"
+redirect_config="server_name _;\n\tadd_header X-Served-By \$hostname;\n\trewrite ^\/redirect_me https:\/\/www.youtube.com permanent;"
 sudo sed -i "s/server_name _;/$redirect_config/" /etc/nginx/sites-enabled/default
 
 # Configure the redirect for the 404 error page.
