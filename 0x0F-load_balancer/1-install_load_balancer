@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# script that installs and configures HAProxy on server 1
+

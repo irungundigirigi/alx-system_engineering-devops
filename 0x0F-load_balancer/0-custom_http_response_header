@@ -1,30 +1,19 @@
-#!/usr/bin/env bash
-# Set up Nginx to include a custom header (X-Served-By) in its HTTP responses on web-01 and web-02.
-# The X-Served-By header's value should be the hostname of the Nginx server.
 sudo apt-get update
 sudo apt-get -y install nginx
 
-# Configure the firewall to allow requests through port 80.
+#Configure the firewall to allow port 80 HTTP requests
 sudo ufw allow 'Nginx HTTP'
 
-# Create necessary directories and set permissions for web content.
+#Create necessary dir and set permissions for web content
 sudo mkdir -p /var/www/html
 sudo chmod -R 755 /var/www
 
-# Create the default index page.
-echo 'Hello World!' | sudo tee /var/www/html/index.html
+# Create default index page
+echo 'Hello World' | sudo tee /var/www/html/index.html
 
-# Create a custom webpage for the 404 error.
-echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
+# Configure redirect for page(/redirect_me) and custom header to display servername
+header_cfg="server_name _;\n\tadd_header X-Served-By \$hostname;\n\trewrite ^\/redirect_me https:\/\/lologic.tech permanent;"
+sudo sed -i "s|server_name _;|$header_cfg|" /etc/nginx/sites-enabled/default
 
-# Configure a redirect for a specific page (/redirect_me) and add a header to display the server's hostname.
-redirect_config="server_name _;\n\tadd_header X-Served-By \$hostname;\n\trewrite ^\/redirect_me https:\/\/www.youtube.com permanent;"
-sudo sed -i "s/server_name _;/$redirect_config/" /etc/nginx/sites-enabled/default
-
-# Configure the redirect for the 404 error page.
-error_page_config="listen 80 default_server;\n\terror_page 404 \/404.html;\n\tlocation = \/404.html {\n\t\troot \/var\/www\/html;\n\t\tinternal;\n\t}"
-sudo sed -i "s/listen 80 default_server;/$error_page_config/" /etc/nginx/sites-enabled/default
-
-# Restart the web server to apply the updated settings.
 sudo service nginx restart
 
