@@ -1,3 +1,7 @@
+#!/usr/bin/env bash
+# Set up Nginx to include a custom header (X-Served-By) in its HTTP responses on web-01 and web-02.
+# The X-Served-By header's value should be the hostname of the Nginx server.
+
 sudo apt-get update
 sudo apt-get -y install nginx
 
