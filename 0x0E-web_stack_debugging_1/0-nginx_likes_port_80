@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Q - find out what’s keeping your Ubuntu container’s Nginx installation from listening on port 80
+# Script deletes existing copy(smlink) to ../etc/sites-available/default and recreates it
+# ln -sf [target] [symlink]
+sudo ln -sf ../etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+sudo service nginx restart
+
