@@ -15,10 +15,10 @@ import requests
 import sys
 
 if __name__ == "__main__":
-    eid = sys.argv[1]
+    _id = sys.argv[1]
     username = requests.get("http://jsonplaceholder.typicode.com/users/{}"
-                            .format(eid)).json().get("username")
-    all_tasks = []
+                            .format(_id)).json().get("username")
+    _tasks = []
     r = requests.get("http://jsonplaceholder.typicode.com/todos").json()
 
     for task in r:
@@ -27,7 +27,7 @@ if __name__ == "__main__":
             temp["task"] = task.get("title")
             temp["completed"] = task.get("completed")
             temp["username"] = username
-            all_tasks.append(temp)
+            _tasks.append(temp)
 
     with open("{}.json".format(eid), 'w+') as jsonfile:
-        json.dump({eid: all_tasks}, jsonfile)
+        json.dump({eid: _tasks}, jsonfile)

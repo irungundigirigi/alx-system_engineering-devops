@@ -10,17 +10,17 @@ if __name__ == "__main__":
     name = requests.get("http://jsonplaceholder.typicode.com/users/{}"
                         .format(eid)).json().get("name")
     total_tasks = 0
-    done_tasks = []
+    _tasks = []
     r = requests.get("http://jsonplaceholder.typicode.com/todos").json()
 
     for task in r:
         if (task.get("userId") == int(eid)):
             total_tasks += 1
             if (task.get("completed")):
-                done_tasks.append(task.get("title"))
+                _tasks.append(task.get("title"))
 
     print("Employee {} is done with tasks({:d}/{:d}):"
           .format(name, len(done_tasks), total_tasks))
 
-    for item in done_tasks:
+    for item in _tasks:
         print("\t {}".format(item))
