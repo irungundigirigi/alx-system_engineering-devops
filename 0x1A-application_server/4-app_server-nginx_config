@@ -14,7 +14,7 @@ server {
 
     # Location for /api/
     location /api/ {
-        proxy_pass http://127.0.0.1:5002/;
+        proxy_pass http://127.0.0.1:5002;
     }
     # Default location for other requests, proxy to Gunicorn
     location / {
