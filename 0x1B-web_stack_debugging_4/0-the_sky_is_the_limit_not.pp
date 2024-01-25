@@ -1,3 +1,5 @@
+#!/usr/bin/env puppet
+
 # setup nginx to handle 2000 requets
 exec {'sets file limite for nginx':
   command => 'sed -i "s/15/2000/g" /etc/default/nginx',
