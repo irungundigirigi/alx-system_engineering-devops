@@ -45,9 +45,5 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
 
-    # Default location block for other requests
-    location / {
-        # Additional configuration can be added here if needed
-    }
 }
 
