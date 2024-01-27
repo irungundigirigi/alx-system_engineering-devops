@@ -12,16 +12,6 @@ server {
     location /airbnb-onepage/ {
         # Proxy the requests to the backend server running on http://127.0.0.1:5000
         proxy_pass http://127.0.0.1:5000;
-
-        # Set proxy headers to pass along the original request information
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    }
-
-    # Default location block for other requests
-    location / {
-        # Additional configuration can be added here if needed
     }
 }
 
